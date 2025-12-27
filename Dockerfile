@@ -59,6 +59,9 @@ RUN chmod +x /etc/my_init.d/*.sh
 COPY ./scripts/docker/custom_udev /etc/init.d/udev
 RUN chmod +x /etc/my_init.d/*.sh
 
+COPY scripts/post_process_wma_samba.sh /arm/scripts/post_process_wma_samba.sh
+RUN chmod +x /arm/scripts/post_process_wma_samba.sh
+
 
 ###########################################################
 # Final image pushed for use
