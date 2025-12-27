@@ -15,6 +15,7 @@ import re  # noqa: E402
 import getpass  # noqa E402
 import pyudev  # noqa: E402
 import psutil  # noqa E402
+import subprocess # wtf is noqa
 
 # set the PATH to /opt/arm so we can handle imports properly
 sys.path.append("/opt/arm")
@@ -124,6 +125,8 @@ def main(logfile, job):
             job.status = JobState.FAILURE.value
             db.session.commit()
         job.eject()
+        if job.status == JobState.SUCCESS.value:
+            subprocess.run("bash /arm/scripts/post_process_wma_samba.sh", shell=True)
 
     # Type: Data
     elif job.disctype == "data":
